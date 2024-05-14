@@ -44,3 +44,34 @@ By combining RSA for asymmetric encryption and a symmetric encryption algorithm 
 2. Decrypt the image file with the symmetric key: Use the decrypted symmetric key to decrypt the encrypted image file using the chosen symmetric encryption algorithm.
 
 By combining RSA for asymmetric encryption and a symmetric encryption algorithm like AES for encrypting the actual image data, you can achieve a secure and efficient encryption scheme for image files.
+
+
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+
+def json_to_avro(json_path, avro_path):
+    # Initialize SparkSession
+    spark = SparkSession.builder \
+        .appName("JSON to Avro Conversion") \
+        .getOrCreate()
+
+    # Define JSON schema
+    json_schema = StructType([
+        StructField("name", StringType(), True),
+        StructField("age", IntegerType(), True)
+    ])
+
+    # Load JSON data
+    df = spark.read.json(json_path, schema=json_schema)
+
+    # Write DataFrame to Avro
+    df.write.format("avro").save(avro_path)
+
+    # Stop SparkSession
+    spark.stop()
+
+# Example usage
+json_path = "input.json"
+avro_path = "output.avro"
+json_to_avro(json_path, avro_path)
+
