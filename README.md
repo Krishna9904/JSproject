@@ -75,3 +75,52 @@ json_path = "input.json"
 avro_path = "output.avro"
 json_to_avro(json_path, avro_path)
 
+
+
+function App() {
+  const [twoTrue, settwoTrue] = useState(false);
+  return (
+    <div className="grandfather">
+      <div className="father">
+        {twoTrue ? (
+          <div className="main">
+            <div className="grandson">
+              <div>
+                <input 
+                  type="checkbox"
+                  id="vehicle1"
+                  name="vehicle1"
+                  value={twoTrue}
+                  onClick={() => settwoTrue(!twoTrue)}
+                />
+              </div>
+              <div></div>
+              <div>
+                <input type="text"  className="inpu"/>
+              </div>
+            </div>
+            <div className="son"></div>
+          </div>
+        ) : (
+          <div className="grandson">
+            <div>
+              <input
+                type="checkbox"
+                id="vehicle1"
+                name="vehicle1"
+                value={twoTrue}
+                onClick={() => settwoTrue(!twoTrue)}
+              />
+            </div>
+            <div></div>
+            <div>
+              <input type="text"  className="inpu"/>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
